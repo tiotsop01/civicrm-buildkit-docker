@@ -7,6 +7,7 @@ services:
     hostname: civicrm
     environment:
       TERM: xterm-color
+      CIVICRM_UF_BASEURL: http://localhost:8080
     links:
       - mysql
     ports:
