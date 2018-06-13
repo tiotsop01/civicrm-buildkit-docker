@@ -3,12 +3,15 @@ version: '3.4'
 services:
 
   civicrm:
-    image: michaelmcandrew/civicrm
+    build:
+      context: civicrm
+      args:
+        BUILDKIT_UID: 1001
+        # BUILDKIT_GID: 1001 # By default, this will be the same as the UID
     hostname: civicrm
     environment:
       TERM: xterm-color
       APACHE_RUN_USER: buildkit
-      CIVICRM_UF_BASEURL: http://www.civi-example.com
     links:
       - mysql
     ports:

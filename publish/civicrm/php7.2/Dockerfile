@@ -1,4 +1,4 @@
-FROM php:7.0-apache-jessie
+FROM php:7.2-apache-jessie
 
 # Install apt packages
 #
