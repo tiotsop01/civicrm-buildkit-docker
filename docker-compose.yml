@@ -7,7 +7,7 @@ services:
     hostname: civicrm
     environment:
       TERM: xterm-color
-      CIVICRM_UF_BASEURL: http://civi-example.com
+      CIVICRM_UF_BASEURL: http://www.civi-example.com
     links:
       - mysql
     ports:
