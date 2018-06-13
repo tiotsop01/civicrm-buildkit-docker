@@ -1,4 +1,4 @@
-FROM php:7.0-apache-jessie
+FROM php:{{ php_version }}-apache-jessie
 
 # Install apt packages
 #
@@ -53,7 +53,11 @@ RUN docker-php-ext-install bcmath \
   && docker-php-ext-install zip
 
 RUN pecl install imagick \
+{% if php_version == 5.6 %}
+  && pecl install xdebug-2.5.5
+{% else %}
   && pecl install xdebug
+{% endif %}
 
 RUN a2enmod rewrite
 

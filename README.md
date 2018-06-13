@@ -6,13 +6,19 @@ The **CiviCRM Dockerfile** ([`civicrm/Dockerfile`]('civicrm/Dockerfile')) in thi
 
 The **docker-compose.yml** file in this repository is a good starting point for Docker development. Advanced users may wish to create their own `docker-compose.yml`.
 
+## Requirements
+
+* Docker
+* Docker compose
+
 ## Getting started
 
-1. Install Docker and Docker compose
-2. Clone this repository
-3. From the repsitory root, run `docker-compose up -d`
-4. Create dmaster with `docker-compose exec -u buildkit civicrm civibuild create dmaster --url http://localhost:8080`
-5. Navigate to your new CiviCRM development site at <http://localhost:8080>
+1. Clone this repository
+2. From the repsitory root, run `docker-compose up -d`
+3. Create dmaster with `docker-compose exec -u buildkit civicrm civibuild create dmaster --url http://localhost:8080`
+4. Navigate to your new CiviCRM development site at <http://localhost:8080>
+
+Note: for less surprises, consider using the stable branch.
 
 ## Usage
 
@@ -71,6 +77,23 @@ You can then:
 
 **Note**: the above aliases assume you have downloaded this repo to `$HOME/civicrm-buildkit-docker`. Please adjust as appropriate if you have downloaded it somewhere else.
 
+### Using different versions of PHP
+
+See [publish/README.md](publish/README.md) for instructions on how to build CiviCRM containers that use different versions of PHP.
+
+## Custom builds
+
+This repository comes with a `docker-compose-build.yml` that can be used for custom builds. One option is to rename it to `docker-compose.yml` and follow the commands above. Alternatively, you can references it in docker-compose commands with the --file argument, e.g.:
+
+```
+docker-compose --file /path/to/docker-compose-build.yml up -d
+```
+
+Custom builds are useful if you want to pass particular arguments to the build. For example, you can define the UID and GID of the buildkit user (see below).
+
+### UID and GID conflicts
+
+Bind mounts are fussy when it comes to user ids and group ids. If the user on your host machine has a different UID and GID to the buildkit user in the container (which is 1000 by default), you can create a custom build that passes BUILDKIT_UID and BUILDKIT_GID as arguments.
 
 ## Getting help
 
@@ -106,3 +129,15 @@ The `docker-compose.yml` defines the following containers:
 It seems like might make sense to integrate this repository with [civicrm-buildkit](https://github.com/civicrm/civicrm-buildkit) at some point. I don't think that would be too hard to do.
 
 More general discussion about CiviCRM and Docker is welcome in CivCRM's ['cloud-native' project](https://lab.civicrm.org/dev/cloud-native).
+
+## Credits
+
+CiviCRM Buildkit Docker is written by [Michael McAndrew](https://twitter.com/michaelmcandrew) from [Third Sector Design](https://thirdsectordesign.org/) who you can [contact](https://thirdsectordesign.org/contact) for help, support and further development.
+
+## Contributing
+
+Contributions to this repository are very welcome. Feel free to submit a pull request for minor improvements. For larger changes, please create an issue first.
+
+## License
+
+This extension is licensed under [AGPL-3.0](LICENSE.txt).
