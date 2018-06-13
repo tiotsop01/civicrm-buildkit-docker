@@ -7,6 +7,7 @@ services:
     hostname: civicrm
     environment:
       TERM: xterm-color
+      APACHE_RUN_USER: buildkit
       CIVICRM_UF_BASEURL: http://www.civi-example.com
     links:
       - mysql
