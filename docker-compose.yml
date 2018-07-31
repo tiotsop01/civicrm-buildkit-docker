@@ -9,6 +9,8 @@ services:
       TERM: xterm-color
       APACHE_RUN_USER: buildkit
       CIVICRM_UF_BASEURL: http://www.civi-example.com:8080
+    extra_hosts:
+      - "www.civi-example.com:127.0.0.1" 
     links:
       - mysql
     ports:
